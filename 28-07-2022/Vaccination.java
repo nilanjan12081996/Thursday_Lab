@@ -15,7 +15,7 @@ abstract class Vaccine
 	abstract public void boosterDose(char com1);//abstract method boosterDose
 	public void firstDose(int age,String country)//concrete method firstDose
 	{
-		if(age==18 && country.equals("India"))
+		if(age>=18 && country.equals("India"))
 		{
 			
 			System.out.println("You are eligible for vaccination\nYou Have to pay Rs.250");
