@@ -1,7 +1,7 @@
 package array;
 
 import java.util.Scanner;
-//create a class 
+//create a class SelectMenu
 public class SelectMenu {
 	// set the menus price and id of food
 	String m1="Biriyani Combo";
