@@ -46,7 +46,7 @@ public class StudentBatch {
 			if(indexa<=50)
 			{
 			aws[indexa]=new Student(id,name,mailid,phno,course);// copy details in aws array
-			indexa++;//increase the index of java array
+			indexa++;//increase the index of aws rray
 			}
 			else
 				System.out.println("Batch is full");
