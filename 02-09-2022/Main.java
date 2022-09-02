@@ -50,7 +50,7 @@ Set<Map.Entry<Integer, Menu>> menu = hmap.entrySet();
 		System.out.println("enter the food id: ");
 		id=sc.nextInt();
 		Menu mn= (Menu)hmap.get(id);
-		Bill.BM(mn.getFooditem(),mn.getPrice());
+		Bill.order(mn.getFooditem(),mn.getPrice());
 		System.out.println("Do you want to order food(y/n?)");
 		ch=sc.next().charAt(0);
 	}while(ch!='n');
