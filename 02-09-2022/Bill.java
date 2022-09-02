@@ -14,7 +14,7 @@ public class Bill {
 	//create a static ArrayList of Billing Type of
 	static ArrayList<Billing> alist=new ArrayList<Billing>();
 	// create a static method BM to take food name and price and pass from the BM method
-	 static void BM(String fname,double d)
+	 static void order(String fname,double d)
 	{
 		Scanner sc=new Scanner(System.in);
 		System.out.println("enter the food quantity: ");//ask user for quantity
