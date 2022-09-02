@@ -25,6 +25,7 @@ public class Bill {
 	static void getBill()
 	{
 		double total=0.0;
+		Scanner sc=new Scanner(System.in);
 		System.out.println("============================================================");
 		
 		for(Billing i: alist)
@@ -33,7 +34,31 @@ public class Bill {
 			total+=i.amount;
 		}
 		System.out.println("===============================================================");
-		System.out.println("You Have to pay: "+total);
+		System.out.println("Total: "+total);
+		//ask user for coupon
+		System.out.println("do you have coupon:(y/n?) ");
+		char co=sc.next().charAt(0);
+		//if coupon apply then get 10% discount
+		if(co=='y')
+		{
+			System.out.println("enter coupon number: ");
+			long num=sc.nextLong();
+			if(num==123456789l)
+			{
+				double dis=total*0.10;
+				double ftotal=total-dis;
+				System.out.println("You have to pay: "+ftotal);
+				
+			}
+			else
+				System.out.println("coupon not applicable");
+		}
+		//otherwise you have to pay total bill
+		else 
+		{
+			System.out.println("You Have to pay: "+total);
+		}
 	}
 	
 }
+
