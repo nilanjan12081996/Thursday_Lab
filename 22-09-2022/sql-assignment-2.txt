@@ -1,0 +1,121 @@
+mysql> create table std_info(reg_no varchar(11) primary key,name varchar(20),branch varchar(20),contact bigint,dob date,doj date,address varchar(50),mail_id varchar(50));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> insert into std_info values('U10001','Nilanjan Dasgupta','CS',7003872448,'1996-08-12','2022-05-10','paharpur road','nilanjan@gmail.com');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> insert into std_info values('U10002','Shawin Pradhan','CS',7009871235,'1998-09-16','2022-04-30','darjeeling','shawin@gmail.com');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into std_info values('U10003','Pallab Rudra','CS',7002356784,'1996-05-20','2022-05-11','barasat','pallab@gmail.com');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into std_info values('U10004','Chandan Maiti','ECE',7003687412,'1999-05-20','2022-04-11','midnapur','chandan@gmail.com');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into std_info values('U10005','Randhir Shaw','ECE',7009874123,'1998-04-20','2022-05-11','dumdum','randhir@gmail.com');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from std_info;
++--------+-------------------+--------+------------+------------+------------+---------------+--------------------+
+| reg_no | name              | branch | contact    | dob        | doj        | address       | mail_id            |
++--------+-------------------+--------+------------+------------+------------+---------------+--------------------+
+| U10001 | Nilanjan Dasgupta | CS     | 7003872448 | 1996-08-12 | 2022-05-10 | paharpur road | nilanjan@gmail.com |
+| U10002 | Shawin Pradhan    | CS     | 7009871235 | 1998-09-16 | 2022-04-30 | darjeeling    | shawin@gmail.com   |
+| U10003 | Pallab Rudra      | CS     | 7002356784 | 1996-05-20 | 2022-05-11 | barasat       | pallab@gmail.com   |
+| U10004 | Chandan Maiti     | ECE    | 7003687412 | 1999-05-20 | 2022-04-11 | midnapur      | chandan@gmail.com  |
+| U10005 | Randhir Shaw      | ECE    | 7009874123 | 1998-04-20 | 2022-05-11 | dumdum        | randhir@gmail.com  |
++--------+-------------------+--------+------------+------------+------------+---------------+--------------------+
+5 rows in set (0.00 sec)
+
+
+create table subject(sub_code varchar(5) primary key,sub1_marks int,sub2_marks int,sub3_marks int,GPA_Weight int,sem varchar(5),reg_no varchar(11),foreign key(reg_no) references std_info(reg_no));
+mysql> desc subject;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| sub_code   | varchar(5)  | NO   | PRI | NULL    |       |
+| sub1_marks | int         | YES  |     | NULL    |       |
+| sub2_marks | int         | YES  |     | NULL    |       |
+| sub3_marks | int         | YES  |     | NULL    |       |
+| GPA_Weight | int         | YES  |     | NULL    |       |
+| sem        | varchar(5)  | YES  |     | NULL    |       |
+| reg_no     | varchar(11) | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+mysql> alter table subject add avg_GPA int;
+Query OK, 0 rows affected (0.45 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> update subject set avg_GPA=8 where sub_code='s001';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update subject set avg_GPA=9 where sub_code='s002';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update subject set avg_GPA=9 where sub_code='s002';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update subject set avg_GPA=8 where sub_code='s003';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update subject set avg_GPA=7 where sub_code='s004';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update subject set avg_GPA=7 where sub_code='s005';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from subject;
++----------+------------+------------+------------+------------+------+--------+---------+
+| sub_code | sub1_marks | sub2_marks | sub3_marks | GPA_Weight | sem  | reg_no | avg_GPA |
++----------+------------+------------+------------+------------+------+--------+---------+
+| s001     |         88 |         98 |         75 |         10 | I    | U10001 |       8 |
+| s002     |         90 |         98 |         95 |         10 | I    | U10002 |       9 |
+| s003     |         95 |         94 |         80 |         10 | I    | U10005 |       8 |
+| s004     |         80 |         78 |         88 |         10 | I    | U10003 |       7 |
+| s005     |         80 |         78 |         88 |         10 | I    | U10004 |       7 |
++----------+------------+------------+------------+------------+------+--------+---------+
+
+mysql> alter table subject rename  column avg_GPA to credit,rename column GPA_Weight to weight;
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from subject;
++----------+------------+------------+------------+--------+------+--------+--------+
+| sub_code | sub1_marks | sub2_marks | sub3_marks | weight | sem  | reg_no | credit |
++----------+------------+------------+------------+--------+------+--------+--------+
+| s001     |         88 |         98 |         75 |     10 | I    | U10001 |      8 |
+| s002     |         90 |         98 |         95 |     10 | I    | U10002 |      9 |
+| s003     |         95 |         94 |         80 |     10 | I    | U10005 |      8 |
+| s004     |         80 |         78 |         88 |     10 | I    | U10003 |      7 |
+| s005     |         80 |         78 |         88 |     10 | I    | U10004 |      7 |
++----------+------------+------------+------------+--------+------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select (sub1_marks+sub2_marks+sub3_marks) as 'total',(weight*credit) as 'GPA' from subject;
++-------+------+
+| total | GPA  |
++-------+------+
+|   261 |   80 |
+|   283 |   90 |
+|   269 |   80 |
+|   246 |   70 |
+|   246 |   70 |
++-------+------+
+5 rows in set (0.01 sec)
+mysql> select i.name,i.reg_no,s.sub1_marks,s.sub2_marks,s.sub3_marks,s.weight,s.credit,(sub1_marks+sub2_marks+sub3_marks)as'total',(weight*credit)as'GPA' from std_info i inner join subject s on i.reg_no=s.reg_no;
++-------------------+--------+------------+------------+------------+--------+--------+-------+------+
+| name              | reg_no | sub1_marks | sub2_marks | sub3_marks | weight | credit | total | GPA  |
++-------------------+--------+------------+------------+------------+--------+--------+-------+------+
+| Nilanjan Dasgupta | U10001 |         88 |         98 |         75 |     10 |      8 |   261 |   80 |
+| Shawin Pradhan    | U10002 |         90 |         98 |         95 |     10 |      9 |   283 |   90 |
+| Pallab Rudra      | U10003 |         80 |         78 |         88 |     10 |      7 |   246 |   70 |
+| Chandan Maiti     | U10004 |         80 |         78 |         88 |     10 |      7 |   246 |   70 |
+| Randhir Shaw      | U10005 |         95 |         94 |         80 |     10 |      8 |   269 |   80 |
++-------------------+--------+------------+------------+------------+--------+--------+-------+------+
+5 rows in set (0.00 sec)
